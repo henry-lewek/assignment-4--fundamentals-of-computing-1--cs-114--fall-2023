@@ -1,9 +1,3 @@
-void board() {
-  size(500, 500);
-  textAlign(CENTER, CENTER);
-  textSize(32);
-}
-
 void draw() {
   background(255);
   drawBoard();
