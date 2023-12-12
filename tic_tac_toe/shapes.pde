@@ -1,31 +1,33 @@
-int[][] board = new int[3][3];
-
-void draw() {
-  background(255);
-  drawBoard();
-}
-
 void drawBoard() {
-  float w = width / 3;
-  float h = height / 3;
+  float cellSize = width / 3;
 
-  for (int i = 0; i < 3; i++) { // Code for printing the TTT board
+  for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) {
-      float x = j * w;
-      float y = i * h;
+      float x = j * cellSize;
+      float y = i * cellSize;
 
       stroke(0);
       fill(255);
-      rect(x, y, w, h);
+      rect(x, y, cellSize, cellSize);
 
-    if (board[i][j] == 1) { // Code for O and X
-      fill(0, 0, 0);
-      ellipse(x + w / 2, y + h / 2, w * 0.8, h * 0.8);
-    } else if (board[i][j] == 2) {
-      fill(255, 0, 0);
-      line(x + w / 4, y + h / 4, x + 3 * w / 4, y + 3 * h / 4);
-      line(x + 3 * w / 4, y + h / 4, x + w / 4, y + 3 * h / 4);
-    }
+      if (board[i][j] == 1) {
+        drawCircle(x, y, cellSize);
+      } else if (board[i][j] == 2) {
+        drawX(x, y, cellSize);
+      }
     }
   }
+}
+
+void drawCircle(float x, float y, float size) {
+  ellipse(x + size / 2, y + size / 2, size * 0.8, size * 0.8);
+}
+
+void drawX(float x, float y, float size) {
+  line(x + size * 0.2, y + size * 0.2, x + size * 0.8, y + size * 0.8);
+  line(x + size * 0.2, y + size * 0.8, x + size * 0.8, y + size * 0.2);
+}
+
+boolean checkLine(int a, int b, int c) {
+  return (a != 0 && a == b && b == c);
 }
